@@ -1,0 +1,22 @@
+.login-page{
+    height: 100vh;
+    background-color: #dedede;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-credentials{
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    height:fit-content ;
+    background-color: white;
+    border-radius: 8px;
+}
+.login-button{
+    padding: 15px;
+    border-radius: 2px;
+}
+.login-input-field{
+    border-radius: 2px;
+}
