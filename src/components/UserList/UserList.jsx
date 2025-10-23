@@ -1,11 +1,81 @@
-import React from 'react'
+import { Avatar, Button, Table,Flex,Popconfirm   } from "antd";
+import React from "react";
+import { useSelector } from "react-redux";
+import "./UserList.css";
 
-const UserList = () => {
+const UserList = ({ data }) => {
+  const { loading } = useSelector((state) => state.users);
+  const columns = [
+    {
+      dataIndex: "avatar",
+      align: "center",
+      width: "250px",
+      render: (src) => <Avatar src={src} />,
+    },
+
+    {
+      title: "Email",
+      dataIndex: "email",
+      render: (_, record) => <a>{record.email}</a>,
+    },
+    {
+      title: "First Name",
+      dataIndex: "first_name",
+      render: (_, record) => `${record.first_name || ""}`,
+    },
+    {
+      title: "Last Name",
+      dataIndex: "last_name",
+      render: (_, record) => `${record.last_name || ""}`,
+    },
+    {
+      title: "Action",
+      render: (_, record) => {
+        return (
+          <Flex gap={15}>
+            <Button
+              type="primary"
+              className="create-user-edit-delete-table-button"
+              onClick={(e) => {
+                e.stopPropagation()
+                console.log(record);
+              }}
+            >
+              Edit
+            </Button>
+            <Popconfirm
+            title="Are you sure to delete this user"
+          placement="top"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={(e)=>{
+            e.stopPropagation()
+            console.log(record)}}
+        >
+            <Button
+              type="primary"
+              className="create-user-edit-delete-table-button"
+              danger
+              onClick={(e)=>{
+                e.stopPropagation()
+              }}
+            >
+              Delete
+            </Button></Popconfirm>
+          </Flex>
+        );},
+    },
+  ];
   return (
     <div>
-      
+      <Table
+        dataSource={data}
+        columns={columns}
+        pagination={false}
+        loading={loading}
+      ></Table>
     </div>
-  )
-}
+  );
+};
 
-export default UserList
+export default UserList;

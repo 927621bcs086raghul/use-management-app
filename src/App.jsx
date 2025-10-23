@@ -10,7 +10,7 @@ const PublicRoute = ({ component }) => {
   console.log(localStorage.getItem("token"))
   const token = localStorage.getItem("token");
   console.log(token)
-  return !token ? component : <Navigate to="/login" />;
+  return !token ? component : <Navigate to="/mainLayout" />;
 };
 
 const ProtectedRoute = ({ component }) => {
@@ -28,11 +28,11 @@ function App() {
 
             <Route
               path="/login"
-              element={<Login  />}
+              element={<PublicRoute component={<Login/>}/>}
             />
             <Route
               path="/mainLayout"
-              element={<MainLayout  />}
+              element={<ProtectedRoute component={<MainLayout />} />}
             />
           </Routes>
         </Router>

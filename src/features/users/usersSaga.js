@@ -9,7 +9,7 @@ import { getUsersAPI } from "../../api/userService";
 function* fetchUsers(action) {
   try {
     const response = yield call(getUsersAPI,action.payload);
-    yield put(fetchUsersSuccess(response.data));
+    yield put(fetchUsersSuccess({response:response.data,datapage:action.payload}));
   } catch (error) {
     yield put(fetchUsersFailure(error.message));
   }

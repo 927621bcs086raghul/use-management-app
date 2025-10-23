@@ -1,0 +1,7 @@
+.ant-table{
+    overflow: scroll;
+    scrollbar-width: none;
+}
+.create-user-edit-delete-table-button{
+    border-radius: 0;
+}

@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <Head className="header">
       <Flex align="center" gap={'20px'}>
-      <p style={{ fontSize: '19px', color: 'hsl(0deg 0% 99.22%)',margin:"0" }}> Username</p>
+      <p style={{ fontSize: '19px', color: 'hsl(0deg 0% 99.22%)',margin:"0" }}> Elon Musk</p>
           <Avatar style={{ cursor: 'pointer' }} className="header-avatar" size={37} icon={<LogoutOutlined/>} shape='square' >
           </Avatar>
       </Flex>

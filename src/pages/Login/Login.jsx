@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Login.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginRequest } from "../../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {loading}= useSelector((state)=> state.auth);
+  console.log(loading)
   const onFinish = (values) => {
     dispatch(loginRequest({email:values.email,password:values.password}))
   };
-
+  const token=localStorage.getItem("token");
+  useEffect(()=>{
+    if(token!=undefined){
+        navigate('/mainLayout')
+    }
+  },[token])
   return (
     
     <div className="login-page">
@@ -42,7 +51,7 @@ const Login = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-button" block>
+          <Button type="primary" htmlType="submit" className="login-button" loading={loading} block>
             Log in
           </Button>
         </Form.Item>
