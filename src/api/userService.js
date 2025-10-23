@@ -8,4 +8,10 @@ export function LoginAPI(action) {
     );
 }
 
+export function getUsersAPI(params) {
+  return axiosClient.get('/users', {
+    params, // example: { page: 1, per_page: 6 }
+  });
+}
+
 

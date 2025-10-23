@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.header-avatar{
+    background-color: hsl(359.33deg 100% 65.1%);
+  box-sizing: border-box;
+}
+ .ant-avatar.ant-avatar-square{
+  border-radius: 0px;   
+}

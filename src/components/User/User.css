@@ -1,0 +1,65 @@
+.user-data-bady{
+    height: calc(100vh - 64px);
+    width: 100vw;
+    background-color: hsl(216deg 20% 95.1%);
+    display: flex;
+    justify-content: center;
+}
+.view-user{
+    margin-top:60px;
+    height: 500px;
+    max-width:100vw ;
+    width: 90%;
+    background-color: white;
+}
+.view-user-head{
+    padding: 0px 40px;
+}
+.ant-tabs-nav-wrap{
+    padding: 0px 40px;
+}
+.ant-tabs-top >.ant-tabs-nav::before{
+    display: none;
+}
+.card-table-user-view .ant-tabs-nav{
+
+    margin: 0px;
+    width: 100%;
+}
+.card-table-user-view .ant-tabs-nav .ant-tabs-nav-list .ant-tabs-tab{
+    padding: 2px 15px;
+    margin: 0px;
+}
+.card-table-user-view .ant-tabs-tab {
+    border: solid 1px hsl(0deg 0% 85.1%);
+  border-radius: 0px;
+  margin: 0;
+  padding: 6px 16px;
+  transition: all 0.2s ease;
+}
+
+
+.card-table-user-view .ant-tabs-tab-active {
+
+  border:solid 1px #1677ff;
+  background: aliceblue;
+}
+
+
+.card-table-user-view .ant-tabs-tab:nth-child(1) {
+  border-top-left-radius: 3px ;
+  border-bottom-left-radius: 3px ;
+  border-top-right-radius: 0 ;
+  border-bottom-right-radius: 0 ;
+}
+
+.card-table-user-view .ant-tabs-tab:nth-child(2) {
+  border-top-right-radius: 3px ;
+  border-bottom-right-radius: 3px ;
+  border-top-left-radius: 0 ;
+  border-bottom-left-radius: 0 ;
+}
+.ant-tabs-ink-bar {
+    display: none;
+  }
+

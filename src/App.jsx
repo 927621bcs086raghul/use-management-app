@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
 import Login from './pages/Login/Login';
 import store from './app/store';
+import MainLayout from './layouts/MainLayout';
 const PublicRoute = ({ component }) => {
   console.log(localStorage.getItem("token"))
   const token = localStorage.getItem("token");
@@ -16,7 +17,6 @@ const ProtectedRoute = ({ component }) => {
   const token = localStorage.getItem("token");  
   return token ? component : <Navigate to="/" />;
 };
-
 function App() {
   return (
     <>
@@ -29,6 +29,10 @@ function App() {
             <Route
               path="/login"
               element={<Login  />}
+            />
+            <Route
+              path="/mainLayout"
+              element={<MainLayout  />}
             />
           </Routes>
         </Router>

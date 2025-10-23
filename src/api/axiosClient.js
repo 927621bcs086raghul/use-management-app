@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Create an axios instance with sensible defaults
+
 const axiosClient = axios.create({
   baseURL: "https://reqres.in/api",
   headers: {
