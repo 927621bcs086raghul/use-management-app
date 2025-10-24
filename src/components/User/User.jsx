@@ -20,13 +20,20 @@ const User = () => {
   const debouncedSearch=useDebounce(search,500)
   console.log(list)
   const [currentPage, setCurrentPage] = useState(1);
+  const page =list.length/6+1;
   useEffect(() => {
     if(list?.length >= total && total!=0){
       return;
     }
+    if(list.length<total && total !=0 ){
+    dispatch(fetchUsersRequest({ page: page, per_page: 6 }));
+  }
 
+  }, [currentPage,page]);
+  useEffect(()=>{
     dispatch(fetchUsersRequest({ page: currentPage, per_page: 6 }));
-  }, [currentPage,list]);
+
+  },[])
   const pageSize = 6;
 
   const handlePageChange = (page) => 

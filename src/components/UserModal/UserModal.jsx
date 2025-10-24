@@ -6,7 +6,7 @@ import { modalCloser, editUserRequest } from "../../features/users/usersSlice";
 const UserModal = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { selectedUser, modalState } = useSelector((state) => state.users);
+  const { selectedUser, modalState,loading } = useSelector((state) => state.users);
 
   useEffect(() => {
     if (selectedUser) {
@@ -63,7 +63,7 @@ const UserModal = () => {
             >
               Cancel
             </Button>
-            <Button type="primary" htmlType="submit">Submit</Button>
+            <Button type="primary" htmlType="submit" loading={loading}>Submit</Button>
           </Flex>
         </Form>
       </Modal>

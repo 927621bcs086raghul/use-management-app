@@ -84,6 +84,7 @@ const usersSlice = createSlice({
       const id=action.payload.id;
       state.list = state.list.map((u) => (u.id === id ? { ...u, ...updatedUser } : u));
       state.reflist = state.reflist.map((u) => (u.id === id ? { ...u, ...updatedUser } : u));
+      state.modalState=false
     },
     editUserFailure: (state, action) => {
       state.loading = false;
