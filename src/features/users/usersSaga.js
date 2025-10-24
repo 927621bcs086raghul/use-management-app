@@ -9,8 +9,16 @@ import {
   getSingleUserSuccess,
   getSingleUserFailure,
 } from "./usersSlice";
+import {
+  editUserRequest,
+  editUserSuccess,
+  editUserFailure,
+} from "./usersSlice";
+import { deleteUserRequest, deleteUserSuccess, deleteUserFailure } from "./usersSlice";
 import { getUsersAPI } from "../../api/userService";
 import { getSelectedUserAPI } from "../../api/userService";
+import { putEditUserAPI } from "../../api/userService";
+import { DeleteUserAPI } from "../../api/userService";
 
 function* fetchUsers(action) {
   try {
@@ -30,7 +38,30 @@ function* getSelectedUser(action) {
   }
 }
 
+function* editUser(action) {
+  try {
+    const payload = action.payload || {};
+    const id = payload.id;
+    let data = payload.data;
+    const response = yield call(putEditUserAPI, id, data);
+    yield put(editUserSuccess({ response: response.data,id:id }));
+  } catch (error) {
+    yield put(editUserFailure(error.message));
+  }
+}
+
+function* deleteUser(action) {
+  try {
+    yield call(DeleteUserAPI, action.payload);
+    yield put(deleteUserSuccess(action.payload));
+  } catch (error) {
+    yield put(deleteUserFailure(error.message));
+  }
+}
+
 export default function* usersSaga() {
   yield takeLatest(fetchUsersRequest.type, fetchUsers);
   yield takeLatest(getSingleUserRequest.type, getSelectedUser);
+  yield takeLatest(editUserRequest.type, editUser);
+  yield takeLatest(deleteUserRequest.type, deleteUser);
 }

@@ -1,7 +1,7 @@
 import { Modal, Form, Input, Button, Flex } from "antd";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { modalCloser } from "../../features/users/usersSlice";
+import { modalCloser, editUserRequest } from "../../features/users/usersSlice";
 
 const UserModal = () => {
   const [form] = Form.useForm();
@@ -21,10 +21,13 @@ const UserModal = () => {
     }
   }, [selectedUser, form, modalState]);
 
+  const onFinish = (values) => {
+    dispatch(editUserRequest({ id: selectedUser.id, data: values }));
+  };
   return (
     <div>
       <Modal
-        title="Edit User"
+        title={`${(selectedUser!= null)?"Edit User":" Create New User"}`}
         open={modalState}
         footer={false}
         onCancel={() => dispatch(modalCloser())}
@@ -33,6 +36,7 @@ const UserModal = () => {
           form={form}
           layout="vertical"
           name="new_user_form"
+          onFinish={onFinish}
           preserve={false}
         >
           <Form.Item label="First Name" name="first_name" required>
@@ -51,7 +55,7 @@ const UserModal = () => {
             <Input placeholder="Image Url" />
           </Form.Item>
 
-          <Flex justify="end" gap={10} className="form-buttons">
+          <Flex justify="end" gap={10} className="form-buttons" >
             <Button
               type="default"
               className="cancel-button"
@@ -59,7 +63,7 @@ const UserModal = () => {
             >
               Cancel
             </Button>
-            <Button type="primary">Submit</Button>
+            <Button type="primary" htmlType="submit">Submit</Button>
           </Flex>
         </Form>
       </Modal>

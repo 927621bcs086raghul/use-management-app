@@ -18,3 +18,11 @@ export function getSelectedUserAPI(params){
   return axiosClient.get(`/users/${params}`);
 }
 
+export function putEditUserAPI(id, payload) {
+  return axiosClient.patch(`/users/${id}`, payload);
+}
+
+export function DeleteUserAPI(id) {
+  return axiosClient.patch(`/users/${id}`);
+}
+

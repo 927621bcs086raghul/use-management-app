@@ -2,10 +2,17 @@ import React from 'react'
 import { Avatar, Card, Button, Popconfirm } from "antd";
 const { Meta } = Card;
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
+import { getSingleUserRequest,deleteUserRequest } from "../../features/users/usersSlice";
+import { useDispatch } from "react-redux";
 import './UserCard.css'
 const UserCard = ({data}) => {
-    
+      const dispatch=useDispatch();
+  const handleEdit=(id)=>{
+    dispatch(getSingleUserRequest(id));
+  }
+  const handleDeleteUser=(id)=>{
+    dispatch(deleteUserRequest(id))
+  }
   return (
     <div className='card-view'>
       {data.map((item) => (
@@ -27,12 +34,16 @@ const UserCard = ({data}) => {
                 shape="circle"
                 icon={<EditOutlined />}
                 className="hover-button"
+                onClick={()=> handleEdit(item?.id)}
               />
               <Popconfirm
                 title="Are you sure to delete this user?"
                 placement="top"
                 okText="Yes"
                 cancelText="No"
+                onConfirm={()=>
+                  handleDeleteUser(item?.id)
+                }
               >
                 <Button
                   type="primary"

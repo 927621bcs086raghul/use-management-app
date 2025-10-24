@@ -2,8 +2,9 @@ import { Avatar, Button, Table,Flex,Popconfirm   } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./UserList.css";
-import { getSingleUserRequest } from "../../features/users/usersSlice";
+import { getSingleUserRequest,deleteUserRequest } from "../../features/users/usersSlice";
 const UserList = ({ data }) => {
+  console.log(data)
   const { loading } = useSelector((state) => state.users);
   const dispatch=useDispatch();
   const columns = [
@@ -51,7 +52,7 @@ const UserList = ({ data }) => {
           cancelText="No"
           onConfirm={(e)=>{
             e.stopPropagation()
-            console.log(record)}}
+            handleDeleteUser(record.id)}}
         >
             <Button
               type="primary"
@@ -59,7 +60,6 @@ const UserList = ({ data }) => {
               danger
               onClick={(e)=>{
                 e.stopPropagation()
-                
               }}
             >
               Delete
@@ -70,6 +70,9 @@ const UserList = ({ data }) => {
   ];
   const handleEdit=(id)=>{
     dispatch(getSingleUserRequest(id));
+  }
+  const handleDeleteUser=(id)=>{
+    dispatch(deleteUserRequest(id))
   }
   return (
     <div>

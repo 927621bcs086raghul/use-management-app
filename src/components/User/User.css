@@ -73,3 +73,16 @@
 .ant-table-wrapper .ant-table-tbody>tr>td{
   padding: 11px 11px;
 }
+
+@media (min-width:270px) and (max-width:530px){
+  .view-user-head{
+        justify-content: center;
+    flex-flow: wrap;
+  }
+  .search-create-user-button-container{
+    padding-bottom: 20px;
+  }
+  .user-data-bady{
+    height: 100%;
+  }
+}

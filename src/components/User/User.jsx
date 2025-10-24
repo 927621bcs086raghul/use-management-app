@@ -9,7 +9,7 @@ import {
 import UserList from "../UserList/UserList";
 import UserCard from "../UserCard/UserCard";
 import { useDispatch } from "react-redux";
-import { fetchUsersRequest,searchUserFilter } from "../../features/users/usersSlice";
+import { fetchUsersRequest,searchUserFilter,modalOpener } from "../../features/users/usersSlice";
 import { useSelector } from "react-redux";
 import useDebounce from "../../hooks/useDebounce";
 const { Search } = Input;
@@ -18,14 +18,20 @@ const User = () => {
   const { list, total } = useSelector((state) => state.users);
   const [search,setSearch]=useState("");
   const debouncedSearch=useDebounce(search,500)
-
+  console.log(list)
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
+    if(list?.length >= total && total!=0){
+      return;
+    }
+
     dispatch(fetchUsersRequest({ page: currentPage, per_page: 6 }));
-  }, [currentPage]);
+  }, [currentPage,list]);
   const pageSize = 6;
 
-  const handlePageChange = (page) => setCurrentPage(page);
+  const handlePageChange = (page) => 
+   
+    setCurrentPage(page);
 
   const paginatedData = list.slice(
     (currentPage - 1) * pageSize,
@@ -54,9 +60,9 @@ const User = () => {
       <div className="view-user">
         <Flex justify="space-between" className="view-user-head">
           <h2>Users</h2>
-          <Flex gap={15} align="center">
+          <Flex gap={15} align="center" className="search-create-user-button-container">
             <Search placeholder="Input search text" onChange={(e)=> setSearch(e.target.value)} />
-            <Button type="primary" style={{ marginTop: "0", borderRadius: 0 }}>
+            <Button type="primary" style={{ marginTop: "0", borderRadius: 0 }} onClick={()=>dispatch(modalOpener())}>
               Create User
             </Button>
           </Flex>
