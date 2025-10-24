@@ -71,7 +71,7 @@ const User = () => {
           <h2>Users</h2>
           <Flex gap={15} align="center" className="search-create-user-button-container">
             <Search placeholder="Input search text" onChange={(e)=> setSearch(e.target.value)} />
-            <Button type="primary" className="buttons"style={{ marginTop: "0", borderRadius: 0 }} onClick={()=>dispatch(modalOpener())}>
+            <Button type="primary" className="buttons" onClick={()=>dispatch(modalOpener())}>
               Create User
             </Button>
           </Flex>
@@ -80,7 +80,6 @@ const User = () => {
       </div>
       <div
         className="user-pagination"
-        style={{ marginTop: 16, textAlign: "right" }}
       >
         <Pagination
           current={currentPage}

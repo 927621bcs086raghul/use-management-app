@@ -29,3 +29,6 @@ export function DeleteUserAPI(id) {
 export function LogoutAPI() {
   return axiosClient.post(`/logout`);
 }
+export function CreateUserAPI(params){
+  return axiosClient.post('/users',params);
+}

@@ -21,7 +21,6 @@ const UserCard = ({data}) => {
         <div key={item.id}>
           <Card
             hoverable
-            style={{ width: "250px" }}
             cover={<Avatar className="avatar-card" src={item.avatar} size="large" />}
             className="card-with-hover"
           >
@@ -36,7 +35,7 @@ const UserCard = ({data}) => {
                 shape="circle"
                 icon={<EditOutlined />}
                 className="hover-button"
-                onClick={()=> handleEdit(item?.id)}
+                onClick={()=> handleEdit(item )}
               />
               <Popconfirm
                 title="Are you sure to delete this user?"

@@ -10,7 +10,14 @@
 .header-avatar{
     background-color: hsl(359.33deg 100% 65.1%);
   box-sizing: border-box;
+  cursor: pointer;
 }
  .ant-avatar.ant-avatar-square{
   border-radius: 0px;   
+}
+
+.header-p{
+  color:hsl(0deg 0% 99.22%);
+  font-size :20px;
+  margin: 0;
 }

@@ -39,21 +39,23 @@ const usersSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    // createUserRequest: (state) => {
-    //   state.loading = true;
-    //   state.error = null;
-    // },
-    // createUserSuccess: (state, action) => {
-    //   state.loading = false;
-    //   const newUser = action.payload;
-    //   state.list = [newUser, ...(state.list || [])];
-    //   state.reflist = [newUser, ...(state.reflist || [])];
-    //   state.total = (state.total || 0) + 1;
-    // },
-    // createUserFailure: (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload;
-    // },
+    createUserRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    createUserSuccess: (state, action) => {
+      console.log(action.payload);
+      state.loading = false;
+      const newUser = action.payload;
+      state.list = [newUser, ...(state.list || [])];
+      state.reflist = [newUser, ...(state.reflist || [])];
+      state.total = (state.total || 0) + 1;
+      state.modalState=false
+    },
+    createUserFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     updateUserRequest: () => {},
 
     deleteUserRequest: (state) => {
@@ -97,6 +99,7 @@ const usersSlice = createSlice({
     },
     getSingleUserSuccess: (state, action) => {
       state.loading = false;
+      console.log(action.payload)
       const user = action.payload.response.data;
       state.selectedUser = user || null;
       state.modalState=true;
@@ -147,6 +150,9 @@ export const {
   editUserRequest,
   editUserSuccess,
   editUserFailure,
+  createUserFailure,
+  createUserRequest,
+  createUserSuccess,
   getSingleUserRequest,
   getSingleUserSuccess,
   getSingleUserFailure,

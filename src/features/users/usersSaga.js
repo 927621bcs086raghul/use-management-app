@@ -9,9 +9,12 @@ import {
   getSingleUserRequest,
   getSingleUserSuccess,
   getSingleUserFailure,
+  createUserFailure,
+  createUserRequest,
+  createUserSuccess,
 } from "./usersSlice";
-import { deleteUserRequest, deleteUserSuccess, deleteUserFailure } from "./usersSlice";
-import { getUsersAPI } from "../../api/userService";
+import { deleteUserRequest, deleteUserSuccess, deleteUserFailure, } from "./usersSlice";
+import { getUsersAPI,CreateUserAPI } from "../../api/userService";
 import { getSelectedUserAPI } from "../../api/userService";
 import { putEditUserAPI } from "../../api/userService";
 import { DeleteUserAPI } from "../../api/userService";
@@ -28,7 +31,13 @@ function* fetchUsers(action) {
 
 function* getSelectedUser(action) {
   try {
-    const response = yield call(getSelectedUserAPI, action.payload);
+    let response
+    if(action.payload.id <=12){
+     response = yield call(getSelectedUserAPI, action.payload.id);}
+    else{
+       response = {data:{data:action.payload}}
+    }
+    console.log(response)
     yield put(getSingleUserSuccess({ response: response.data }));
   } catch (error) {
     yield put(getSingleUserFailure(error.message));
@@ -59,10 +68,22 @@ function* deleteUser(action) {
     message.error("user deleter failed to delete user")
   }
 }
-
+function* createUser(action){
+  try{
+    const response =yield call(CreateUserAPI ,action.payload);
+    yield put(createUserSuccess(response.data,action.payload));
+    message.success("user created successfully");
+  }
+  catch{
+    yield put(createUserFailure());
+    message.error("failed to create user");
+  }
+}
 export default function* usersSaga() {
   yield takeLatest(fetchUsersRequest.type, fetchUsers);
   yield takeLatest(getSingleUserRequest.type, getSelectedUser);
   yield takeLatest(editUserRequest.type, editUser);
   yield takeLatest(deleteUserRequest.type, deleteUser);
+  yield takeLatest(createUserRequest.type, createUser);
+
 }

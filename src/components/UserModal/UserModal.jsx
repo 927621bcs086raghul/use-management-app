@@ -1,7 +1,7 @@
 import { Modal, Form, Input, Button, Flex } from "antd";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { modalCloser, editUserRequest } from "../../features/users/usersSlice";
+import { modalCloser, editUserRequest,createUserRequest } from "../../features/users/usersSlice";
 
 const UserModal = () => {
   const [form] = Form.useForm();
@@ -22,7 +22,11 @@ const UserModal = () => {
   }, [selectedUser, form, modalState]);
 
   const onFinish = (values) => {
-    dispatch(editUserRequest({ id: selectedUser.id, data: values }));
+    if(selectedUser!=null){
+    dispatch(editUserRequest({ id: selectedUser.id, data: values }));}
+      else{
+        dispatch(createUserRequest(values))
+      }
   };
   return (
     <div>
@@ -39,20 +43,41 @@ const UserModal = () => {
           onFinish={onFinish}
           preserve={false}
         >
-          <Form.Item label="First Name" name="first_name" required>
-            <Input placeholder="First name" />
+          <Form.Item label="First Name" name="first_name"
+          rules={[
+            { required: true, message: "Please enter first name" },
+          ]}
+          required>
+            <Input placeholder="Please enter First name" 
+            />
           </Form.Item>
 
-          <Form.Item label="Last Name" name="last_name" required>
-            <Input placeholder="Last name" />
+          <Form.Item label="Last Name" name="last_name"
+          rules={[
+            { required: true, message: "Please enter last name" },
+          ]}
+          required>
+            <Input placeholder="Please enter Last name" />
           </Form.Item>
 
-          <Form.Item label="Email" name="email" required>
-            <Input placeholder="Email" />
+          <Form.Item label="Email" name="email"
+          rules={[
+            { required: true, message: "Please enter email" },
+          ]}
+          required>
+            <Input placeholder=" Please enter Email" />
           </Form.Item>
 
-          <Form.Item label="Profile Image Link" name="avatar" required>
-            <Input placeholder="Image Url" />
+          <Form.Item label="Profile Image Link" name="avatar"
+          rules={[{
+      pattern:/(?:data:image\/(gif|png|jpe?g|webp|bmp|svg\+xml);base64,[A-Za-z0-9+/]+={0,2}|(?:https?:)?\/\/[^\s'"]+\.(?:png|jpe?g|gif|webp|bmp|svg)(?:\?[^\s'"]*)?)/ig,
+      message: "Enter a valid image URL (jpg, jpeg, png,webp)",
+
+    },
+            { required: true, message: "Please enter image url" },
+
+    ]} required>
+            <Input placeholder="Please enter profile image link" />
           </Form.Item>
 
           <Flex justify="end" gap={10} className="form-buttons" >

@@ -40,7 +40,7 @@ const UserList = ({ data }) => {
               className="create-user-edit-delete-table-button buttons"
               onClick={(e) => {
                 e.stopPropagation()
-                handleEdit(record?.id)
+                handleEdit(record)
               }}
             >
               Edit
@@ -68,8 +68,8 @@ const UserList = ({ data }) => {
         );},
     },
   ];
-  const handleEdit=(id)=>{
-    dispatch(getSingleUserRequest(id));
+  const handleEdit=(record)=>{
+    dispatch(getSingleUserRequest(record));
   }
   const handleDeleteUser=(id)=>{
     dispatch(deleteUserRequest(id))
