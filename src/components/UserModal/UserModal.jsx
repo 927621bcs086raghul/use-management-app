@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Button, Flex } from "antd";
+import { Modal, Form, Input, Button, Flex, message } from "antd";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { modalCloser, editUserRequest,createUserRequest } from "../../features/users/usersSlice";
@@ -6,7 +6,7 @@ import { modalCloser, editUserRequest,createUserRequest } from "../../features/u
 const UserModal = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { selectedUser, modalState,loading } = useSelector((state) => state.users);
+  const { selectedUser, modalState,loading,list } = useSelector((state) => state.users);
 
   useEffect(() => {
     if (selectedUser) {
@@ -22,9 +22,18 @@ const UserModal = () => {
   }, [selectedUser, form, modalState]);
 
   const onFinish = (values) => {
+     const emailExists = list?.some(
+    (user) => user.email.toLowerCase() === values.email.toLowerCase()
+  );
     if(selectedUser!=null){
+      
+
     dispatch(editUserRequest({ id: selectedUser.id, data: values }));}
       else{
+        if (emailExists) {
+      message.error("Email already exists!");
+      return; // stop form submission
+    }
         dispatch(createUserRequest(values))
       }
   };
