@@ -26,3 +26,6 @@ export function DeleteUserAPI(id) {
   return axiosClient.patch(`/users/${id}`);
 }
 
+export function LogoutAPI() {
+  return axiosClient.post(`/logout`);
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./User.css";
-import { Button, Flex, Input, Tabs, Pagination } from "antd";
+import { Button, Flex, Input, Tabs, Pagination,Spin } from "antd";
 import {
   SearchOutlined,
   TableOutlined,
@@ -46,6 +46,7 @@ const User = () => {
   );
   useEffect(()=>{
     dispatch(searchUserFilter(debouncedSearch));
+    setCurrentPage(1);
   },[debouncedSearch])
   const itemsuser = [
     {
@@ -64,12 +65,13 @@ const User = () => {
 
   return (
     <div className="user-data-bady">
+      
       <div className="view-user">
         <Flex justify="space-between" className="view-user-head">
           <h2>Users</h2>
           <Flex gap={15} align="center" className="search-create-user-button-container">
             <Search placeholder="Input search text" onChange={(e)=> setSearch(e.target.value)} />
-            <Button type="primary" style={{ marginTop: "0", borderRadius: 0 }} onClick={()=>dispatch(modalOpener())}>
+            <Button type="primary" className="buttons"style={{ marginTop: "0", borderRadius: 0 }} onClick={()=>dispatch(modalOpener())}>
               Create User
             </Button>
           </Flex>

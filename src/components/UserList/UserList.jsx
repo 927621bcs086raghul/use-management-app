@@ -37,7 +37,7 @@ const UserList = ({ data }) => {
           <Flex gap={15}>
             <Button
               type="primary"
-              className="create-user-edit-delete-table-button"
+              className="create-user-edit-delete-table-button buttons"
               onClick={(e) => {
                 e.stopPropagation()
                 handleEdit(record?.id)
@@ -56,7 +56,7 @@ const UserList = ({ data }) => {
         >
             <Button
               type="primary"
-              className="create-user-edit-delete-table-button"
+              className="create-user-edit-delete-table-button buttons"
               danger
               onClick={(e)=>{
                 e.stopPropagation()

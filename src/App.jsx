@@ -25,7 +25,6 @@ function App() {
           <Routes>
             
             <Route path="/" element={<Navigate to="/login" />} />
-
             <Route
               path="/login"
               element={<PublicRoute component={<Login/>}/>}
@@ -34,6 +33,7 @@ function App() {
               path="/mainLayout"
               element={<ProtectedRoute component={<MainLayout />} />}
             />
+            <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </Router>
         </Provider>

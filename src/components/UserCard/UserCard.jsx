@@ -4,6 +4,7 @@ const { Meta } = Card;
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { getSingleUserRequest,deleteUserRequest } from "../../features/users/usersSlice";
 import { useDispatch } from "react-redux";
+import { Empty } from 'antd';
 import './UserCard.css'
 const UserCard = ({data}) => {
       const dispatch=useDispatch();
@@ -15,7 +16,8 @@ const UserCard = ({data}) => {
   }
   return (
     <div className='card-view'>
-      {data.map((item) => (
+      {(data.length ==0 )? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />:
+      data.map((item) => (
         <div key={item.id}>
           <Card
             hoverable
@@ -56,7 +58,9 @@ const UserCard = ({data}) => {
             </div>
           </Card>
         </div>
-      ))}
+      ))
+
+      }
     </div>
   )
 }

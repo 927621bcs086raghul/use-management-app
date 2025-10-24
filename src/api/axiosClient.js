@@ -13,12 +13,12 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   (config) => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('token');
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = ` ${token}`;
       }
     } catch {
-      // ignore localStorage errors in non-browser environments
+      // ignore
     }
     return config;
   },

@@ -126,7 +126,6 @@ const usersSlice = createSlice({
         state.total =state.list.length;
       }
     },
-
     modalCloser:(state)=>{
       state.modalState=false;
     },

@@ -58,12 +58,12 @@ const UserModal = () => {
           <Flex justify="end" gap={10} className="form-buttons" >
             <Button
               type="default"
-              className="cancel-button"
+              className="cancel-button buttons"
               onClick={() => dispatch(modalCloser())}
             >
               Cancel
             </Button>
-            <Button type="primary" htmlType="submit" loading={loading}>Submit</Button>
+            <Button type="primary" htmlType="submit" className="buttons" loading={loading}>Submit</Button>
           </Flex>
         </Form>
       </Modal>

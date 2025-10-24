@@ -1,5 +1,5 @@
 .user-data-bady{
-    height: calc(100vh - 64px);
+    min-height: calc(100vh - 64px);
     width: 100vw;
     background-color: hsl(216deg 20% 95.1%);
     display: flex;
@@ -85,4 +85,17 @@
   .user-data-bady{
     height: 100%;
   }
+}
+
+.logout-spin{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255,.2);
+}
+.buttons{
+  margin-top: 0;
+  border-radius: 0;
 }

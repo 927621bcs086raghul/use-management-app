@@ -3,22 +3,19 @@ import {
   fetchUsersRequest,
   fetchUsersSuccess,
   fetchUsersFailure,
-} from "./usersSlice";
-import {
-  getSingleUserRequest,
-  getSingleUserSuccess,
-  getSingleUserFailure,
-} from "./usersSlice";
-import {
   editUserRequest,
   editUserSuccess,
   editUserFailure,
+  getSingleUserRequest,
+  getSingleUserSuccess,
+  getSingleUserFailure,
 } from "./usersSlice";
 import { deleteUserRequest, deleteUserSuccess, deleteUserFailure } from "./usersSlice";
 import { getUsersAPI } from "../../api/userService";
 import { getSelectedUserAPI } from "../../api/userService";
 import { putEditUserAPI } from "../../api/userService";
 import { DeleteUserAPI } from "../../api/userService";
+import { message } from "antd";
 
 function* fetchUsers(action) {
   try {
@@ -45,8 +42,10 @@ function* editUser(action) {
     let data = payload.data;
     const response = yield call(putEditUserAPI, id, data);
     yield put(editUserSuccess({ response: response.data,id:id }));
+    message.success("user edited successfully");
   } catch (error) {
     yield put(editUserFailure(error.message));
+    message.error("user editer failed to edit")
   }
 }
 
@@ -54,8 +53,10 @@ function* deleteUser(action) {
   try {
     yield call(DeleteUserAPI, action.payload);
     yield put(deleteUserSuccess(action.payload));
+    message.success("user deleted successfully")
   } catch (error) {
     yield put(deleteUserFailure(error.message));
+    message.error("user deleter failed to delete user")
   }
 }
 
