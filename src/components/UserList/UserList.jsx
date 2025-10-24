@@ -1,10 +1,11 @@
 import { Avatar, Button, Table,Flex,Popconfirm   } from "antd";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./UserList.css";
-
+import { getSingleUserRequest } from "../../features/users/usersSlice";
 const UserList = ({ data }) => {
   const { loading } = useSelector((state) => state.users);
+  const dispatch=useDispatch();
   const columns = [
     {
       dataIndex: "avatar",
@@ -38,7 +39,7 @@ const UserList = ({ data }) => {
               className="create-user-edit-delete-table-button"
               onClick={(e) => {
                 e.stopPropagation()
-                console.log(record);
+                handleEdit(record?.id)
               }}
             >
               Edit
@@ -58,6 +59,7 @@ const UserList = ({ data }) => {
               danger
               onClick={(e)=>{
                 e.stopPropagation()
+                
               }}
             >
               Delete
@@ -66,6 +68,9 @@ const UserList = ({ data }) => {
         );},
     },
   ];
+  const handleEdit=(id)=>{
+    dispatch(getSingleUserRequest(id));
+  }
   return (
     <div>
       <Table

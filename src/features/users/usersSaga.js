@@ -4,7 +4,13 @@ import {
   fetchUsersSuccess,
   fetchUsersFailure,
 } from "./usersSlice";
+import {
+  getSingleUserRequest,
+  getSingleUserSuccess,
+  getSingleUserFailure,
+} from "./usersSlice";
 import { getUsersAPI } from "../../api/userService";
+import { getSelectedUserAPI } from "../../api/userService";
 
 function* fetchUsers(action) {
   try {
@@ -15,6 +21,16 @@ function* fetchUsers(action) {
   }
 }
 
+function* getSelectedUser(action) {
+  try {
+    const response = yield call(getSelectedUserAPI, action.payload);
+    yield put(getSingleUserSuccess({ response: response.data }));
+  } catch (error) {
+    yield put(getSingleUserFailure(error.message));
+  }
+}
+
 export default function* usersSaga() {
   yield takeLatest(fetchUsersRequest.type, fetchUsers);
+  yield takeLatest(getSingleUserRequest.type, getSelectedUser);
 }

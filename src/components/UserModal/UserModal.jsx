@@ -1,0 +1,70 @@
+import { Modal, Form, Input, Button, Flex } from "antd";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { modalCloser } from "../../features/users/usersSlice";
+
+const UserModal = () => {
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const { selectedUser, modalState } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    if (selectedUser) {
+      form.setFieldsValue({
+        first_name: selectedUser.first_name || "",
+        last_name: selectedUser.last_name || "",
+        email: selectedUser.email || "",
+        avatar: selectedUser.avatar || "",
+      });
+    } else {
+      form.resetFields();
+    }
+  }, [selectedUser, form, modalState]);
+
+  return (
+    <div>
+      <Modal
+        title="Edit User"
+        open={modalState}
+        footer={false}
+        onCancel={() => dispatch(modalCloser())}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          name="new_user_form"
+          preserve={false}
+        >
+          <Form.Item label="First Name" name="first_name" required>
+            <Input placeholder="First name" />
+          </Form.Item>
+
+          <Form.Item label="Last Name" name="last_name" required>
+            <Input placeholder="Last name" />
+          </Form.Item>
+
+          <Form.Item label="Email" name="email" required>
+            <Input placeholder="Email" />
+          </Form.Item>
+
+          <Form.Item label="Profile Image Link" name="avatar" required>
+            <Input placeholder="Image Url" />
+          </Form.Item>
+
+          <Flex justify="end" gap={10} className="form-buttons">
+            <Button
+              type="default"
+              className="cancel-button"
+              onClick={() => dispatch(modalCloser())}
+            >
+              Cancel
+            </Button>
+            <Button type="primary">Submit</Button>
+          </Flex>
+        </Form>
+      </Modal>
+    </div>
+  );
+};
+
+export default UserModal;
