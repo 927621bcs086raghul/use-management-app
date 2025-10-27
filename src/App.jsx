@@ -7,9 +7,7 @@ import Login from './pages/Login/Login';
 import store from './app/store';
 import MainLayout from './layouts/MainLayout';
 const PublicRoute = ({ component }) => {
-  console.log(localStorage.getItem("token"))
   const token = localStorage.getItem("token");
-  console.log(token)
   return !token ? component : <Navigate to="/mainLayout" />;
 };
 

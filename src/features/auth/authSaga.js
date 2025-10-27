@@ -5,13 +5,11 @@ import { message } from "antd";
 function* handleLogin(action) {
   try {
     const response = yield call(LoginAPI, action.payload);
-    console.log(response)
     localStorage.setItem("token", response.data.token);
     yield put(loginSuccess(response.data.token));
     message.success("you logged in successfully");
 
   } catch (error) {
-    console.log(error)
     yield put(loginFailure(error.message));
     message.error(error?.response?.data?.error || "login failed")
   }

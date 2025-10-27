@@ -10,7 +10,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {loading}= useSelector((state)=> state.auth);
-  console.log(loading)
   const onFinish = (values) => {
     dispatch(loginRequest({email:values.email,password:values.password}))
   };

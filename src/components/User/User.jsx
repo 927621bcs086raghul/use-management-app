@@ -18,7 +18,6 @@ const User = () => {
   const { list, total } = useSelector((state) => state.users);
   const [search,setSearch]=useState("");
   const debouncedSearch=useDebounce(search,500)
-  console.log(list)
   const [currentPage, setCurrentPage] = useState(1);
   const page =list.length/6+1;
   useEffect(() => {

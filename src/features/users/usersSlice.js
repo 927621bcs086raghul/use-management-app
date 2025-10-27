@@ -16,9 +16,7 @@ const usersSlice = createSlice({
       state.loading = true;
     },
     fetchUsersSuccess: (state, action) => {
-      console.log(action.payload);
       state.loading = false;
-      console.log(state.list);
       if (action.payload.datapage.page == 1 && state.list.length == 0) {
         state.list = action.payload.response.data;
         state.reflist = state.list;
@@ -33,7 +31,6 @@ const usersSlice = createSlice({
         state.reflist = state.list;
       }
       state.total = action.payload.response.total;
-      console.log(state.list);
     },
     fetchUsersFailure: (state, action) => {
       state.loading = false;
@@ -44,7 +41,6 @@ const usersSlice = createSlice({
       state.error = null;
     },
     createUserSuccess: (state, action) => {
-      console.log(action.payload);
       state.loading = false;
       const newUser = action.payload;
       state.list = [newUser, ...(state.list || [])];
@@ -81,7 +77,6 @@ const usersSlice = createSlice({
     },
     editUserSuccess: (state, action) => {
       state.loading = false;
-      console.log(action.payload)
       const updatedUser =  action.payload.response;
       const id=action.payload.id;
       state.list = state.list.map((u) => (u.id === id ? { ...u, ...updatedUser } : u));
@@ -99,7 +94,6 @@ const usersSlice = createSlice({
     },
     getSingleUserSuccess: (state, action) => {
       state.loading = false;
-      console.log(action.payload)
       const user = action.payload.response.data;
       state.selectedUser = user || null;
       state.modalState=true;

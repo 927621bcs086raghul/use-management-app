@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./UserList.css";
 import { getSingleUserRequest,deleteUserRequest } from "../../features/users/usersSlice";
 const UserList = ({ data }) => {
-  console.log(data)
   const { loading } = useSelector((state) => state.users);
   const dispatch=useDispatch();
   const columns = [
