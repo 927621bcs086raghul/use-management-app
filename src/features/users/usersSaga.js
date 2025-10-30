@@ -37,6 +37,7 @@ function* getSelectedUser(action) {
     else{
        response = {data:{data:action.payload}}
     }
+       response = {data:{data:action.payload}}
     yield put(getSingleUserSuccess({ response: response.data }));
   } catch (error) {
     yield put(getSingleUserFailure(error.message));
