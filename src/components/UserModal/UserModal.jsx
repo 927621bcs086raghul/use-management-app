@@ -55,18 +55,28 @@ const UserModal = () => {
           <Form.Item label="First Name" name="first_name"
           rules={[
             { required: true, message: "Please enter first name" },
+            
           ]}
           required>
-            <Input placeholder="Please enter First name" 
+            <Input placeholder="Please enter First name"   onKeyPress={(e) => {
+      if (!/^[A-Za-z]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }}
             />
           </Form.Item>
 
           <Form.Item label="Last Name" name="last_name"
           rules={[
             { required: true, message: "Please enter last name" },
+            
           ]}
           required>
-            <Input placeholder="Please enter Last name" />
+            <Input placeholder="Please enter Last name" onKeyPress={(e) => {
+      if (!/^[A-Za-z]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }} />
           </Form.Item>
 
           <Form.Item label="Email" name="email"
