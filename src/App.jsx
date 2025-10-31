@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import './App.css'
 import '@ant-design/v5-patch-for-react-19';
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
-import Login from './pages/Login/Login';
+const Login = lazy(() => import('./pages/Login/Login'));
+const MainLayout = lazy(() => import('./layouts/MainLayout'));
 import store from './app/store';
-import MainLayout from './layouts/MainLayout';
 const PublicRoute = ({ component }) => {
   const token = localStorage.getItem("token");
   return !token ? component : <Navigate to="/mainLayout" />;
@@ -20,8 +20,8 @@ function App() {
     <>
     <Provider store={store}>
      <Router>
+         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            
             <Route path="/" element={<Navigate to="/login" />} />
             <Route
               path="/login"
@@ -33,6 +33,7 @@ function App() {
             />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
+         </Suspense>
         </Router>
         </Provider>
     </>
